@@ -1,11 +1,12 @@
 @extends('layoutpractice.layout')
 
-@section('COMPONENT')
+@section('header')
 
     <title>HELLO</title>
     <p>
         this is header
     </p>
+
 @endsection
 
 
