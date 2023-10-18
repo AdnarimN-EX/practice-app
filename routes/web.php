@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,20 +21,44 @@ Route::get('/', function () {
 
 Route::get('newpage/{article}', function ($slug) {
 
-    $path = __DIR__ . "/../resources/samples/{$slug}.html";
-
-    if (!file_exists($path)) {
-        abort(404);
-    }
-
-    $content = file_get_contents($path);
-
+    //With New Class
     return view('newpage', [
-        'content' => $content
+        'content' => Post::find($slug)
+    ]);
+
+
+    // $path = __DIR__ . "/../resources/samples/{$slug}.html";
+
+    // if (!file_exists($path)) {
+    //     abort(404);
+    // }
+
+    // $content = file_get_contents($path);
+
+    // return view('newpage', [
+    //     'content' => $content
+    // ]);
+});
+
+Route::get('chicken',function(){
+
+    $data = [
+        ['flavor'=>'spicy'],
+        ['flavor'=>'sweet'],
+    ];
+
+    return view('chickenwings/layout',[
+        'chick' => $data
     ]);
 });
 
+Route::get('hometest', function () {
+    return view('hometest');
+});
 
+Route::get('layoutpractice', function () {
+    return view('layoutpractice/header');
+});
 
 //
 Route::get('/dashboard', function () {
