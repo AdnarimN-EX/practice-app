@@ -15,9 +15,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
+Route::get('newpage/{article}', function ($slug) {
+
+    $path = __DIR__ . "/../resources/samples/{$slug}.html";
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+
+    $content = file_get_contents($path);
+
+    return view('newpage', [
+        'content' => $content
+    ]);
+});
+
+
+
+//
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -28,4 +46,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
