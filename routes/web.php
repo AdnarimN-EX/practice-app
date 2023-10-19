@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -57,15 +58,23 @@ Route::get('chicken',function(){
 
 Route::get('post', function () {
 
-    return view('postSingle',[
-        'content' => Post::all()
+    return view('post',[
+        'content' => Post::with('category')->get()
     ]);
+
 });
 
 Route::get('post/{post:slug}', function (Post $post) {
 
-    return view('post',[
+    return view('postSingle',[
         'content' => $post
+    ]);
+});
+
+Route::get('category/{category:slug}', function (Category $category) {
+
+    return view('post',[
+        'content' => $category->post
     ]);
 });
 

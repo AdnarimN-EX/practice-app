@@ -11,12 +11,19 @@
 </head>
 
 <body>
-        
-    <article>
-            <h1>{{ $content->title }}</h1>
 
-            <p>{{ $content->body }}</p>
-    </article>
+
+    @foreach ($content as $item)
+
+    <h1><a href={{"post/$item->slug"}}> {!!$item->title!!} </a></h1>
+
+    <h4><a href="/category/{{$item -> category -> slug}}">{!!$item->category->name!!}</a></h4>
+
+    <p>{!!$item->body!!}</p>
+
+@endforeach
+        
+
 
 
 </body>

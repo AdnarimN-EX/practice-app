@@ -8,10 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-    @foreach ($content as $item)
-        <h1>{!!$item->title!!}</h1>
+    <article>
+        <h1>{{ $content->title }}</h1>
 
-        <p>{!!$item->body!!}</p>
-    @endforeach
+        <p>{{ $content->body }}</p>
+</article>
 </body>
 </html>
