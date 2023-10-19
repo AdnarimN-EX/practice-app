@@ -52,6 +52,24 @@ Route::get('chicken',function(){
     ]);
 });
 
+
+//POST
+
+Route::get('post', function () {
+
+    return view('postSingle',[
+        'content' => Post::all()
+    ]);
+});
+
+Route::get('post/{post:slug}', function (Post $post) {
+
+    return view('post',[
+        'content' => $post
+    ]);
+});
+
+
 Route::get('hometest', function () {
     return view('hometest');
 });
