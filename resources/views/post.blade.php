@@ -13,11 +13,13 @@
 <body>
 
 
-    @foreach ($content as $item)
+    @foreach ($content as $item)    
 
     <h1><a href={{"post/$item->slug"}}> {!!$item->title!!} </a></h1>
+    
+    <h3><a href={{"authors/$item->author"}}>AUTHOR: {{$item->author->name}}</a></h3>
 
-    <h4><a href="/category/{{$item -> category -> slug}}">{!!$item->category->name!!}</a></h4>
+    <h4><a href="/category/{{$item -> category -> slug}}">Category: {!!$item->category->name!!}</a></h4>
 
     <p>{!!$item->body!!}</p>
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,6 @@ Route::get('newpage/{article}', function ($slug) {
         'content' => Post::find($slug)
     ]);
 
-
     // $path = __DIR__ . "/../resources/samples/{$slug}.html";
 
     // if (!file_exists($path)) {
@@ -41,50 +41,29 @@ Route::get('newpage/{article}', function ($slug) {
     // ]);
 });
 
-Route::get('chicken',function(){
-
-    $data = [
-        ['flavor'=>'spicy'],
-        ['flavor'=>'sweet'],
-    ];
-
-    return view('chickenwings/layout',[
-        'chick' => $data
-    ]);
-});
-
-
 //POST
-
 Route::get('post', function () {
-
     return view('post',[
-        'content' => Post::with('category')->get()
+        'content' => Post::latest()->with('category', 'author')->get()
     ]);
-
 });
 
 Route::get('post/{post:slug}', function (Post $post) {
-
     return view('postSingle',[
         'content' => $post
     ]);
 });
 
 Route::get('category/{category:slug}', function (Category $category) {
-
     return view('post',[
         'content' => $category->post
     ]);
 });
 
-
-Route::get('hometest', function () {
-    return view('hometest');
-});
-
-Route::get('layoutpractice', function () {
-    return view('layoutpractice/header');
+Route::get('authors/{author}', function (User $author) {
+    return view('post',[
+        'content' => $author->posts
+    ]);
 });
 
 //
